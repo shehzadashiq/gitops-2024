@@ -7,6 +7,9 @@ on:
 jobs:
   tflint:
     runs-on: ${{ matrix.os }}
+    defaults:
+        run:
+            working-directory: ./terraform
 
     strategy:
       matrix:
