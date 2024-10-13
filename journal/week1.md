@@ -98,7 +98,6 @@ Creates new Popup
 
 ![image](https://github.com/user-attachments/assets/1a3e5cc9-e29a-457f-8534-9f127ec5770b)
 
-
 ### Github OAuth Token
 
 ![image](https://github.com/user-attachments/assets/47cae3eb-2a43-4424-835e-4ae41b82665a)
