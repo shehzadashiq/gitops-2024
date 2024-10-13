@@ -81,4 +81,31 @@ sudo apt-get install terraform
 
 Once all the required components were installed, running `pre-commit -a` shows the following which means that the pre-commit has been installed successfully and is working as expected.
 
+## Terraform API Token
+
+Generate token via [https://app.terraform.io/app/settings/tokens](https://app.terraform.io/app/settings/tokens)
+
+### User API Token
+
+![image](https://github.com/user-attachments/assets/59885c02-47e6-4901-a215-985b2b3e867a)
+
+Creates new Popup
+
+![image](https://github.com/user-attachments/assets/1a3e5cc9-e29a-457f-8534-9f127ec5770b)
+
+
+### Github OAuth Token
+
+![image](https://github.com/user-attachments/assets/47cae3eb-2a43-4424-835e-4ae41b82665a)
+
+Creates new window
+
+![image](https://github.com/user-attachments/assets/f4a17572-2920-4cf1-a92d-85d6ec8ee8ad)
+
+
+
+
+
+
+
 ![image](https://github.com/user-attachments/assets/5a1f1b7a-181d-4e92-966c-81215587bd40)
