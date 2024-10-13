@@ -1,8 +1,8 @@
 variable "region" {
-    type = "string"
+    type = string
     default = "eu-west-2"
 }
 variable "instance_type" {
-    type = "string"
+    type = string
     default = "t3.small"
 }
