@@ -39,5 +39,4 @@ terraform.rc
 # Ignore AWS folder and installer
 **/aws/*
 awscliv2.zip
-terraform/secrets.tfvar
 terraform/secrets.tfvars
