@@ -5,6 +5,11 @@
     - [Pre-Requisites Installation](#pre-requisites-installation)
     - [Terraform Installation](#terraform-installation)
     - [Working Pre-Commit](#working-pre-commit)
+  - [Terraform API Token](#terraform-api-token)
+    - [User API Token](#user-api-token)
+    - [Github OAuth Token](#github-oauth-token)
+    - [Error when action is run](#error-when-action-is-run)
+  - [Terraform workspace configuration](#terraform-workspace-configuration)
 
 ## Pre-Commit Installation
 
@@ -102,10 +107,51 @@ Creates new window
 
 ![image](https://github.com/user-attachments/assets/f4a17572-2920-4cf1-a92d-85d6ec8ee8ad)
 
-
-
-
-
-
-
 ![image](https://github.com/user-attachments/assets/5a1f1b7a-181d-4e92-966c-81215587bd40)
+
+### Error when action is run
+
+![image](https://github.com/user-attachments/assets/8c61776a-3ec1-4f42-9cd6-bd98ccbb0e11)
+
+Run `terraform login`
+
+Paste the token here you generated earlier:
+
+If successful you should see the following output
+
+![image](https://github.com/user-attachments/assets/2ce5bd13-bfbe-48ca-b38b-403275036eb6)
+
+```sh
+Retrieved token for user shehzadashiq
+
+
+---------------------------------------------------------------------------------
+
+                                          -                                
+                                          -----                           -
+                                          ---------                      --
+                                          ---------  -                -----
+                                           ---------  ------        -------
+                                             -------  ---------  ----------
+                                                ----  ---------- ----------
+                                                  --  ---------- ----------
+   Welcome to HCP Terraform!                       -  ---------- -------
+                                                      ---  ----- ---
+   Documentation: terraform.io/docs/cloud             --------   -
+                                                      ----------
+                                                      ----------
+                                                       ---------
+                                                           -----
+                                                               -
+
+
+   New to HCP Terraform? Follow these steps to instantly apply an example configuration:
+
+   $ git clone https://github.com/hashicorp/tfc-getting-started.git
+   $ cd tfc-getting-started
+   $ scripts/setup.sh
+```
+
+## Terraform workspace configuration
+
+This needs to be changed to local instead of remote.
