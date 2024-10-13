@@ -40,3 +40,4 @@ terraform.rc
 **/aws/*
 awscliv2.zip
 terraform/secrets.tfvar
+terraform/secrets.tfvars
