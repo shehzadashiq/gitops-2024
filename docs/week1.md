@@ -41,7 +41,7 @@ Terraform-docs was missing so the following error ws generated
 
 ![image](https://github.com/user-attachments/assets/4523ad85-6278-48c6-9c6e-b933a6afb8fa)
 
-Install terraform-docs using `pre-commit run -a` 
+Install terraform-docs using `go install github.com/terraform-docs/terraform-docs@v0.19.0`
 
 After this the work still complained that terraform was missing
 
