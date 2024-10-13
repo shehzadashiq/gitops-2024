@@ -5,6 +5,11 @@
     - [Pre-Requisites Installation](#pre-requisites-installation)
     - [Terraform Installation](#terraform-installation)
     - [Working Pre-Commit](#working-pre-commit)
+  - [Terraform API Token](#terraform-api-token)
+    - [User API Token](#user-api-token)
+    - [Github OAuth Token](#github-oauth-token)
+    - [Error when action is run](#error-when-action-is-run)
+  - [Terraform workspace configuration](#terraform-workspace-configuration)
 
 ## Pre-Commit Installation
 
@@ -146,3 +151,7 @@ Retrieved token for user shehzadashiq
    $ cd tfc-getting-started
    $ scripts/setup.sh
 ```
+
+## Terraform workspace configuration
+
+This needs to be changed to local instead of remote.
