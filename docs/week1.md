@@ -1,5 +1,11 @@
 # Week 1
 
+- [Week 1](#week-1)
+  - [Pre-Commit Installation](#pre-commit-installation)
+    - [Pre-Requisites Installation](#pre-requisites-installation)
+    - [Terraform Installation](#terraform-installation)
+    - [Working Pre-Commit](#working-pre-commit)
+
 ## Pre-Commit Installation
 
 Pre-commit needs to be installed with various components
