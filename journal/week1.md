@@ -102,6 +102,7 @@ Creates new window
 
 ![image](https://github.com/user-attachments/assets/f4a17572-2920-4cf1-a92d-85d6ec8ee8ad)
 
+![image](https://github.com/user-attachments/assets/5a1f1b7a-181d-4e92-966c-81215587bd40)
 
 ### Error when action is run
 
@@ -145,5 +146,3 @@ Retrieved token for user shehzadashiq
    $ cd tfc-getting-started
    $ scripts/setup.sh
 ```
-
-![image](https://github.com/user-attachments/assets/5a1f1b7a-181d-4e92-966c-81215587bd40)
