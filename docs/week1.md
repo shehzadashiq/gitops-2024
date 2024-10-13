@@ -35,4 +35,3 @@ Pre-commit needs to be installed with various components
 - terraform-docs (Installed via go)
 
 ### Working Pre-Commit
-
