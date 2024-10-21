@@ -20,6 +20,15 @@ jobs:
           shell: bash
 
     steps:
+
+    # Use OIDC Role
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: eu-west-2
+        role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+        role-session-name: gitOps2024
+
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
