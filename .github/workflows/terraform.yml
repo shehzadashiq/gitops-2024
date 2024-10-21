@@ -17,18 +17,16 @@ jobs:
     environment: production
     defaults:
       run:
-          working-directory: ./terraform
-          shell: bash
+        shell: bash
+        working-directory: ./terraform
 
     steps:
-
-    # Use OIDC Role
+    # Use OIDC Role to checkout the repository with the Github Actions Runner
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: eu-west-2
         role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
-        role-session-name: gitOps2024
 
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
