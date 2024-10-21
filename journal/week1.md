@@ -154,3 +154,4 @@ Retrieved token for user shehzadashiq
 ## Terraform workspace configuration
 
 This needs to be changed to local instead of remote.
+
