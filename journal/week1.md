@@ -98,7 +98,6 @@ Creates new Popup
 
 ![image](https://github.com/user-attachments/assets/1a3e5cc9-e29a-457f-8534-9f127ec5770b)
 
-
 ### Github OAuth Token
 
 ![image](https://github.com/user-attachments/assets/47cae3eb-2a43-4424-835e-4ae41b82665a)
@@ -155,3 +154,9 @@ Retrieved token for user shehzadashiq
 ## Terraform workspace configuration
 
 This needs to be changed to local instead of remote.
+
+### Terraform Workspace login issues
+
+With the `cloud` provider configured to connect to Terraform workspace I encountered the following error.
+
+![image](https://github.com/user-attachments/assets/388de5ea-0c02-4c99-88d0-24cf4f56be56)
