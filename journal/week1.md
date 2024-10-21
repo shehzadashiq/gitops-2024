@@ -155,3 +155,8 @@ Retrieved token for user shehzadashiq
 
 This needs to be changed to local instead of remote.
 
+### Terraform Workspace login issues
+
+With the `cloud` provider configured to connect to Terraform workspace I encountered the following error.
+
+![image](https://github.com/user-attachments/assets/388de5ea-0c02-4c99-88d0-24cf4f56be56)
