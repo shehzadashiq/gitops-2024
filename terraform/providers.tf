@@ -1,4 +1,14 @@
 terraform {
+  # backend "remote" {
+  #   # The name of your Terraform Cloud organization.
+  #   organization = "shehzad"
+
+  #   # The name of the Terraform Cloud workspace to store Terraform state files in.
+  #   workspaces {
+  #     name = "GitOps-2024"
+  #   }
+  # }
+
   # cloud {
   #   organization = "shehzad"
 
