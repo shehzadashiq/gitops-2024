@@ -8,13 +8,7 @@ terraform {
   #     name = "GitOps-2024"
   #   }
   # }
-  cloud {
-    organization = "shehzad"
 
-    workspaces {
-      name = "GitOps-2024"
-    }
-  }
 }
 
 data "aws_ami" "ubuntu" {
