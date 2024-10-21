@@ -10,12 +10,15 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket         = "gitops-tf-backend-shehzadashiq"
-    key            = "terraform.tfstate"
-    dynamodb_table = "GitopsTerraformLocks"
-    region         = var.region
-  }
+  # S3 configuration is not required as we are using a cloud configuration
+  # Using both will generate the following error
+  # Error: Both a backend and cloud configuration are present
+  # backend "s3" {
+  #   bucket         = "gitops-tf-backend-shehzadashiq"
+  #   key            = "terraform.tfstate"
+  #   dynamodb_table = "GitopsTerraformLocks"
+  #   region         = var.region
+  # }
 
   required_providers {
     aws = {
