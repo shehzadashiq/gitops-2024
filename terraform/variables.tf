@@ -8,6 +8,7 @@ variable "instance_type" {
   default = "t3.small"
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "TF_TOKEN_app_terraform_io" {
   type    = string
   default = ""
