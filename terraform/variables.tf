@@ -9,5 +9,6 @@ variable "instance_type" {
 }
 
 variable "TF_TOKEN_app_terraform_io" {
-  type = string
+  type    = string
+  default = ""
 }
