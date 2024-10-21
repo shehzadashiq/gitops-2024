@@ -9,13 +9,13 @@ terraform {
   #   }
   # }
 
-  # cloud {
-  #   organization = "shehzad"
+  cloud {
+    organization = "shehzad"
 
-  #   workspaces {
-  #     name = "GitOps-2024"
-  #   }
-  # }
+    workspaces {
+      name = "GitOps-2024"
+    }
+  }
 
   required_providers {
     aws = {
