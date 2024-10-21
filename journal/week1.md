@@ -153,7 +153,42 @@ Retrieved token for user shehzadashiq
 
 ## Terraform workspace configuration
 
-This needs to be changed to local instead of remote.
+### Execution Mode
+
+This needs to be changed to local instead of remote under the workspace settings `/settings/general`
+
+![image](https://github.com/user-attachments/assets/79e2b9a7-5992-47ef-af41-4fd2162a9292)
+
+If configured correctly, the workspace summary will show this.
+
+![image](https://github.com/user-attachments/assets/0057b789-4119-41c6-aadb-a55a71366973)
+
+### Errors connecting to Workspace
+
+After setting the workspace up, the following error was shown in the action
+
+![image](https://github.com/user-attachments/assets/6f73fd80-11d8-4da6-ac75-e069264e7cb7)
+
+To resolve this, the following steps need to be carried out
+
+- Generate an API Token
+- Add the secret to the repository with the name `TF_API_TOKEN`
+- If environments are being used, the secret `TF_API_TOKEN` needs to be added to these environments too
+- In the `terraform.yml` file add the following section
+
+```yaml
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+```
+
+If successful the terraform action should be able to initialise successfully.
+
+![image](https://github.com/user-attachments/assets/df82f139-98be-4752-acd5-dbccac99bc3a)
+
+  
 
 ### Terraform Workspace login issues
 

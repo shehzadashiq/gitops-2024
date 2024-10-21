@@ -13,4 +13,5 @@ The code in the ./terraform directory is the starter code for the course. This c
 The `/journal` directory contains
 
 - [X] [Week 0](journal/week0.md)
-- [X] [Week 0](journal/week1.md)
+- [X] [Week 1](journal/week1.md)
+- [X] [Week 2](journal/week2.md)
