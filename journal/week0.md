@@ -4,7 +4,7 @@ Introduction to bootcamp.
 
 ## Adding Secrets
 
-To add a secret using the gh client use the following format 
+To add a secret using the gh client use the following format
 
 `gh secret set secret_name`
 
