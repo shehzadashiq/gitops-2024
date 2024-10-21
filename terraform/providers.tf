@@ -10,6 +10,13 @@ terraform {
     }
   }
 
+  backend "s3" {
+    bucket         = "gitops-tf-backend-shehzadashiq"
+    key            = "terraform.tfstate"
+    dynamodb_table = "GitopsTerraformLocks"
+    region         = var.region
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
