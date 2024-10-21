@@ -16,9 +16,8 @@ jobs:
     environment: production
     defaults:
       run:
-        shell: bash
-        working-directory: ./terraform
-          
+          working-directory: ./terraform
+          shell: bash
 
     steps:
     # Checkout the repository to the GitHub Actions runner
