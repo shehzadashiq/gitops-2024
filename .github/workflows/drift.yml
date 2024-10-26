@@ -2,7 +2,7 @@ name: 'Drift Detection'
 
 on:
     schedule:
-        - cron: '*/45 * * * *'
+        - cron: '*/30 * * * *'
 
 jobs:
   detect_drift:
