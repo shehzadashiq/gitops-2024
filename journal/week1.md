@@ -10,6 +10,9 @@
     - [Github OAuth Token](#github-oauth-token)
     - [Error when action is run](#error-when-action-is-run)
   - [Terraform workspace configuration](#terraform-workspace-configuration)
+    - [Execution Mode](#execution-mode)
+    - [Errors connecting to Workspace](#errors-connecting-to-workspace)
+    - [Terraform Workspace login issues](#terraform-workspace-login-issues)
 
 ## Pre-Commit Installation
 
@@ -187,8 +190,6 @@ To resolve this, the following steps need to be carried out
 If successful the terraform action should be able to initialise successfully.
 
 ![image](https://github.com/user-attachments/assets/df82f139-98be-4752-acd5-dbccac99bc3a)
-
-  
 
 ### Terraform Workspace login issues
 
