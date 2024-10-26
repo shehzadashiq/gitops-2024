@@ -44,7 +44,7 @@ jobs:
       run: terraform fmt -check
 
     # Generates an execution plan for Terraform
-    - name: Terraform Plan
+    - name: Terraform Plan -destroy
       run: terraform plan -input=false
 
     # Destroy the Configuration
