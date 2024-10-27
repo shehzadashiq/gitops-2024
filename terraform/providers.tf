@@ -38,4 +38,10 @@ terraform {
 
 provider "aws" {
   region = var.region
+  default_tags {
+    tags = {
+      Environment = "Production"
+      Project     = "GitOps-2024"
+    }
+  }
 }
