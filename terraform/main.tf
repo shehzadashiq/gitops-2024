@@ -106,19 +106,16 @@ resource "aws_instance" "grafana_server" {
   vpc_security_group_ids = [aws_security_group.gitops_sg.id]
   user_data              = file("userdata.tftpl")
 
-  tags = merge(
-    var.default_tags,
-    {
-      Name = "grafana-server"
-    }
-  )
+  tags = {
+    Name = "grafana-server"
+  }
 }
 
 check "grafana_health_check" {
   data "http" "test" {
     url = "http://${aws_instance.grafana_server.public_ip}:3000"
     retry {
-      attempts = 10
+      attempts = 5
     }
   }
   assert {
