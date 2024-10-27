@@ -56,6 +56,6 @@ jobs:
       # Generates an execution plan for Terraform
       - name: Terraform Plan
         run: |
-          terraform plan -input=false
+          terraform plan -out=plan.tfplan
           terraform show -json plan.tfplan > /tmp/plan.json
           cat /tmp/plan.json
