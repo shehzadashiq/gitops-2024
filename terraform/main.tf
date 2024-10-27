@@ -19,17 +19,23 @@ resource "aws_vpc" "gitops_vpc" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = {
-    Name = "gitops-vpc"
-  }
+  tags = merge(
+    var.default_tags,
+    {
+      Name = "gitops-vpc"
+    }
+  )
 }
 
 resource "aws_internet_gateway" "gitops_igw" {
   vpc_id = aws_vpc.gitops_vpc.id
 
-  tags = {
-    Name = "gitops-igw"
-  }
+  tags = merge(
+    var.default_tags,
+    {
+      Name = "gitops-igw"
+    }
+  )
 }
 
 resource "aws_route_table" "gitops_rt" {
@@ -40,9 +46,12 @@ resource "aws_route_table" "gitops_rt" {
     gateway_id = aws_internet_gateway.gitops_igw.id
   }
 
-  tags = {
-    Name = "gitops-rt"
-  }
+  tags = merge(
+    var.default_tags,
+    {
+      Name = "gitops-rt"
+    }
+  )
 }
 
 resource "aws_subnet" "gitops_subnet" {
@@ -50,9 +59,12 @@ resource "aws_subnet" "gitops_subnet" {
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "gitops-subnet"
-  }
+  tags = merge(
+    var.default_tags,
+    {
+      Name = "gitops-subnet"
+    }
+  )
 }
 
 resource "aws_route_table_association" "gitops_rta" {
@@ -79,9 +91,12 @@ resource "aws_security_group" "gitops_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "gitops-sg"
-  }
+  tags = merge(
+    var.default_tags,
+    {
+      Name = "gitops-sg"
+    }
+  )
 }
 
 resource "aws_instance" "grafana_server" {

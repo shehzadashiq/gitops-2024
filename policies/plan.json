@@ -1,0 +1,67 @@
+{
+    "format_version": "1.2",
+    "terraform_version": "1.9.8",
+    "resource_changes": [
+        {
+            "address": "aws_instance.grafana_server",
+            "mode": "managed",
+            "type": "aws_instance",
+            "name": "grafana_server",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "instance_type": "t3.micro"
+                }
+            }
+        },
+        {
+            "address": "aws_internet_gateway.gitops_igw",
+            "mode": "managed",
+            "type": "aws_internet_gateway",
+            "name": "gitops_igw",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Environment": "Prod",
+                        "Name": "gitops-igw",
+                        "Project": "GitOps-2024",
+                        "Service": "GitOps Bootcamp"
+                    },
+                    "tags_all": {
+                        "Environment": "Prod",
+                        "Name": "gitops-igw",
+                        "Project": "GitOps-2024",
+                        "Service": "GitOps Bootcamp"
+                    },
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "owner_id": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": true
+                },
+                "before_sensitive": false,
+                "after_sensitive": {
+                    "tags": {},
+                    "tags_all": {}
+                }
+            }
+        }
+    ],
+    "timestamp": "2024-10-27T19:54:31Z",
+    "applyable": true,
+    "complete": true,
+    "errored": false
+}
