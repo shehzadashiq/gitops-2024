@@ -9,6 +9,8 @@ on:
     secrets:
       ROLE_TO_ASSUME:
         required: true
+      cli_config_credentials_token:
+        required: false
 
 permissions:
   contents: read

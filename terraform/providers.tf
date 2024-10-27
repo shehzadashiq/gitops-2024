@@ -17,7 +17,7 @@ terraform {
   #   bucket         = "gitops-tf-backend-shehzadashiq"
   #   key            = "terraform.tfstate"
   #   dynamodb_table = "GitopsTerraformLocks"
-  #   region         = var.region
+  #   region         = "eu-west-2"
   # }
 
   required_providers {
