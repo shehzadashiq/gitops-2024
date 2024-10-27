@@ -48,11 +48,11 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias  = global
+  alias  = "global"
   region = "us-east-1"
 }
 
 provider "aws" {
-  alias  = uk
+  alias  = "uk"
   region = var.region
 }
