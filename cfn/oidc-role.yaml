@@ -1,3 +1,4 @@
+---
 Parameters:
   Repo:
     Description: The GitHub organization/repo for which the OIDC provider is set up

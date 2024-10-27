@@ -1,8 +1,9 @@
+---
 name: 'Drift Detection'
 
 on:
-    schedule:
-        - cron: '*/30 * * * *'
+  schedule:
+    - cron: '*/30 * * * *'
 
 jobs:
   detect_drift:
@@ -12,4 +13,4 @@ jobs:
       id-token: write
       pull-requests: write
     secrets:
-      ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}      
+      ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
