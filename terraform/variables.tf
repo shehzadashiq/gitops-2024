@@ -13,3 +13,12 @@ variable "TF_TOKEN_app_terraform_io" {
   type    = string
   default = ""
 }
+
+variable "default_tags" {
+  type = map(string)
+  default = {
+    Environment = "Prod"
+    Project     = "GitOps-2024"
+    Service     = "GitOps Bootcamp"
+  }
+}

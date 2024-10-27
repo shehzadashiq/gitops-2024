@@ -19,9 +19,12 @@ resource "aws_vpc" "gitops_vpc" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = {
-    Name = "gitops-vpc"
-  }
+  tags = merge(
+    var.default_tags,
+    {
+      Name = "gitops-vpc"
+    }
+  )
 }
 
 resource "aws_internet_gateway" "gitops_igw" {
