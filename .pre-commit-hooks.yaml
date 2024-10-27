@@ -1,3 +1,4 @@
+---
 - id: yamllint
   name: yamllint
   description: This hook runs yamllint.

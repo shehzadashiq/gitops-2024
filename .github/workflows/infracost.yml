@@ -1,3 +1,4 @@
+---
 name: 'Run Infracost'
 
 # Based on sample: https://github.com/infracost/actions
@@ -6,7 +7,7 @@ name: 'Run Infracost'
 # The GitHub Action docs (https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows) describe other trigger options.
 on:
   pull_request:
-    types: [opened, synchronize, closed]  
+    types: [opened, synchronize, closed]
 
 jobs:
   # This stage runs the Infracost CLI and posts PR comments.
@@ -19,12 +20,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write # Required to post comments
-    # env:
-      # If you store Terraform variables or modules in a 3rd party such as TFC or Spacelift,
-      # specify the following so Infracost can automatically retrieve them.
-      # See https://www.infracost.io/docs/features/terraform_modules/#registry-modules for details.
-      #   INFRACOST_TERRAFORM_CLOUD_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      #   INFRACOST_TERRAFORM_CLOUD_HOST: app.terraform.io
+
     steps:
       - name: Setup Infracost
         uses: infracost/actions/setup@v3
