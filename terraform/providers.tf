@@ -36,9 +36,8 @@ terraform {
   }
 }
 
+
 provider "aws" {
-  alias  = uk
-  region = var.region
   default_tags {
     tags = {
       Environment = "Prod"
@@ -51,12 +50,9 @@ provider "aws" {
 provider "aws" {
   alias  = global
   region = "us-east-1"
-  default_tags {
-    tags = {
-      Environment = "Prod"
-      Project     = "GitOps-2024"
-      Service     = "GitOps Bootcamp"
-    }
-  }
 }
 
+provider "aws" {
+  alias  = uk
+  region = var.region
+}
