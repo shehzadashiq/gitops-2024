@@ -48,11 +48,25 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias  = "global"
-  region = "us-east-1"
+  alias  = "dev"
+  region = var.region
+  default_tags {
+    tags = {
+      Environment = "Dev"
+      Project     = "GitOps-2024"
+      Service     = "GitOps Bootcamp"
+    }
+  }
 }
 
 provider "aws" {
-  alias  = "uk"
+  alias  = "Prod"
   region = var.region
+  default_tags {
+    tags = {
+      Environment = "Prod"
+      Project     = "GitOps-2024"
+      Service     = "GitOps Bootcamp"
+    }
+  }
 }
