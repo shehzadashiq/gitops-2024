@@ -26,6 +26,8 @@ jobs:
       run:
         shell: bash
         working-directory: ./terraform
+    env:
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       # Use OIDC Role to checkout the repository with the Github Actions Runner
