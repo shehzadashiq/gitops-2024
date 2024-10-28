@@ -1,5 +1,5 @@
 ---
-name: 'Drift Detection Alternate'
+name: 'Drift Detection'
 
 on:
   schedule:
