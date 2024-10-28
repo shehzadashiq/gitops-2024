@@ -10,7 +10,7 @@ on:
       ROLE_TO_ASSUME:
         required: true
       cli_config_credentials_token:
-        required: false
+        required: true
 
 permissions:
   contents: read

@@ -1,5 +1,6 @@
 ---
-name: 'Drift Detection Old'
+# This version of drift detection does not work with Terraform cloud as it cannot access the TF_API_TOKEN
+name: 'Drift Detection S3'
 
 on:
   schedule:
@@ -14,4 +15,3 @@ jobs:
       pull-requests: write
     secrets:
       ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
-      cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
