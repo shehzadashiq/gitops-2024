@@ -28,3 +28,7 @@ The following protections have applied
 - Require status checks to pass before merging
 
 ![image](https://github.com/user-attachments/assets/5010a999-79e3-4f04-8c48-ea1a4529fc80)
+
+## Added Github PR Template
+
+The following [PR Template](../.github/pull_request_template.md) was created.
