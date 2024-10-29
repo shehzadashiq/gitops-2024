@@ -58,7 +58,6 @@ jobs:
     environment: production
     defaults:
       run:
-        shell: bash
         working-directory: ./terraform
     needs: terraform
 
