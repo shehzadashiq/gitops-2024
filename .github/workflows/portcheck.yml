@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform Plan'
     runs-on: ubuntu-latest
     environment: production
     defaults:
@@ -56,6 +56,10 @@ jobs:
   port-check:
     runs-on: ubuntu-latest
     environment: production
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
     needs: terraform
 
     steps:
