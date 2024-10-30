@@ -3,7 +3,7 @@ name: Check Port Accessibility
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: read
@@ -50,9 +50,9 @@ jobs:
         run: terraform plan -input=false
 
       # Generates an execution plan for Terraform
-      - name: Terraform Plan
+      - name: Terraform Plan Output
         run: |
-          terraform plan -out=plan.tfplan -input=false
+          terraform plan -out=plan.tfplan
           terraform output -json plan.tfplan > /tmp/plan.json
 
       # Apply the Configuration
