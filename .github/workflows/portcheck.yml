@@ -53,15 +53,6 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -input=false -auto-approve
 
-  port-check:
-    runs-on: ubuntu-latest
-    environment: production
-    defaults:
-      run:
-        working-directory: ./terraform
-    needs: terraform
-
-    steps:
       - name: Get instance details
         run: |
           # Get the IP of the deployed instance or service via Terraform outputs
