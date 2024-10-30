@@ -51,22 +51,27 @@ jobs:
 
       # Apply the Configuration
       - name: Terraform Apply
-        run: terraform apply -input=false -auto-approve
-
-      - name: Get instance details
         run: |
-          # Get the IP of the deployed instance or service via Terraform outputs
-          GRAFANA_IP=$(terraform output -raw grafana_ip)
+          terraform apply -input=false -auto-approve
+          terraform output -json plan.tfplan > /tmp/plan.json
 
-          echo "Grafana IP is: $grafana_ip"
-          echo "GRAFANA_IP=$GRAFANA_IP" >> $GITHUB_ENV
-
-      - name: Validate Port Accessibility
+      # Extract values from Terraform output
+      - name: Extract Terraform Output
+        id: extract
         run: |
-          # Check if port 3000 is accessible on the instance
-          if nc -z -v -w5 $INSTANCE_IP 3000; then
-            echo "Port 3000 is accessible on $INSTANCE_IP"
+          ip=$(jq -r '.instance_ip.value' < /tmp/plan.json)
+          port=$(jq -r '.instance_port.value' < /tmp/plan.json)
+          echo "IP=$ip" >> $GITHUB_ENV
+          echo "PORT=$port" >> $GITHUB_ENV
+
+      # Step 6: Check if the port is accessible
+      - name: Check Port Accessibility
+        run: |
+          echo "Checking if $IP:$PORT is accessible..."
+          timeout 5 bash -c "cat < /dev/null > /dev/tcp/$IP/$PORT"
+          if [ $? -eq 0 ]; then
+            echo "Port $PORT on $IP is accessible."
           else
-            echo "Port 3000 is NOT accessible on $INSTANCE_IP"
+            echo "Port $PORT on $IP is not accessible." >&2
             exit 1
           fi
