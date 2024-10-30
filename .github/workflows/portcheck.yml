@@ -69,7 +69,7 @@ jobs:
           echo "IP=$ip" >> $GITHUB_ENV
           echo "PORT=$port" >> $GITHUB_ENV
 
-      # Step 6: Check if the port is accessible
+      # Step Check if the port is accessible
       - name: Check Port Accessibility
         run: |
           echo "Checking if $IP:$PORT is accessible..."
