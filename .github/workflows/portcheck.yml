@@ -49,16 +49,17 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false
 
-      # Generates an execution plan for Terraform
-      - name: Terraform Plan Output
-        run: |
-          terraform plan -out=plan.tfplan
-          terraform output -json plan.tfplan > /tmp/plan.json
+      # # Generates an execution plan for Terraform
+      # - name: Terraform Plan Output
+      #   run: |
+      #     terraform output -json >
+      #     terraform output -json plan.tfplan > /tmp/plan.json
 
       # Apply the Configuration
       - name: Terraform Apply
         run: |
           terraform apply -input=false -auto-approve
+          terraform output -json > /tmp/plan.json
 
       # Extract values from Terraform output
       - name: Extract Terraform Output
