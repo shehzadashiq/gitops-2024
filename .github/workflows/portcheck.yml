@@ -74,12 +74,36 @@ jobs:
 
       # Step Check if the port is accessible
       - name: Check Port Accessibility
+        id: check-port
         run: |
           echo "Checking if $IP:$PORT is accessible..."
           timeout 5 bash -c "cat < /dev/null > /dev/tcp/$IP/$PORT"
-          if [ $? -eq 0 ]; then
-            echo "Port $PORT on $IP is accessible."
-          else
-            echo "Port $PORT on $IP is not accessible." >&2
-            exit 1
-          fi
+        continue-on-error: true
+
+      # Create Issue if Port is Inaccessible
+      - name: Create Issue if Port is Inaccessible
+        if: steps.check-port.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const ip = process.env.IP;
+            const port = process.env.PORT;
+            const issueTitle = `Port ${port} on ${ip} is not accessible`;
+            const issueBody = `The port ${port} on IP ${ip} could not be reached. Please investigate the issue.`;
+
+            // Check if an issue already exists
+            const existingIssues = await github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+            });
+
+            // Only create an issue if one with the same title does not exist
+            if (!existingIssues.data.some(issue => issue.title === issueTitle)) {
+              await github.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+              });
+            }
