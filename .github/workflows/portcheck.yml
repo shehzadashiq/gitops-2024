@@ -67,6 +67,8 @@ jobs:
         run: |
           ip=$(jq -r '.instance_ip.value' < /tmp/plan.json)
           port=$(jq -r '.instance_port.value' < /tmp/plan.json)
+          echo "IP=$ip"
+          echo "PORT=$port"
           echo "IP=$ip" >> $GITHUB_ENV
           echo "PORT=$port" >> $GITHUB_ENV
 
