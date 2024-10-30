@@ -65,8 +65,18 @@ jobs:
       - name: Extract Terraform Output
         id: extract
         run: |
-          ip=$(jq -r '.instance_ip.value' < /tmp/plan.json)
-          port=$(jq -r '.instance_port.value' < /tmp/plan.json)
+          url=$(jq -r '.grafana_ip.value' < /tmp/plan.json)
+          # port=$(jq -r '.instance_port.value' < /tmp/plan.json)
+
+          # Use regex to extract IP and port from the URL
+          ip=$(echo "$url" | sed -E 's|http://([^:]+):([0-9]+)|\1|')
+          port=$(echo "$url" | sed -E 's|http://([^:]+):([0-9]+)|\2|')
+
+          if [[ -z "$ip" || -z "$port" ]]; then
+            echo "Error: IP or PORT value is empty."
+            exit 1
+          fi
+
           echo "IP=$ip"
           echo "PORT=$port"
           echo "IP=$ip" >> $GITHUB_ENV
