@@ -107,8 +107,8 @@ jobs:
           script: |
             const ip = process.env.IP;
             const port = process.env.PORT;
-            const issueTitle = `Port ${port} on ${ip} is not accessible`;
-            const issueBody = `The port ${port} on IP ${ip} could not be reached. Please investigate the issue.`;
+            const issueTitle = `Grafana Port is not accessible`;
+            const issueBody = `Port 3000 on IP ${ip} could not be reached. Please investigate the issue.`;
 
             // Check if an issue already exists
             const existingIssues = await github.rest.issues.listForRepo({
