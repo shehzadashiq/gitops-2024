@@ -1,0 +1,62 @@
+---
+name: Detect Terraform Drift On Plan
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+    # - cron: '0 0 * * *'  # Runs daily at midnight (UTC)
+    # - cron:  '0 * * * *' # Every hour.
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write  # Required to post comments
+  issues: write  # Grant write permission to allow issue creation
+
+jobs:
+  detect-drift:
+    name: Detect Terraform Drift
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      # Use OIDC Role to checkout the repository with the Github Actions Runner
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-west-2
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init
+
+      # Check for Drift with Terraform Plan (refresh-only)
+      - name: Terraform Plan (Refresh Only)
+        id: plan
+        run: |
+          terraform plan -refresh-only -no-color > plan.txt
+          if grep -q "No changes. Infrastructure is up-to-date." plan.txt; then
+            echo "No drift detected."
+            echo "DRIFT=false" >> $GITHUB_ENV
+          else
+            echo "Drift detected!"
+            echo "DRIFT=true" >> $GITHUB_ENV
+          fi
