@@ -1,6 +1,12 @@
 # Week 0
 
-Introduction to bootcamp.
+- [Week 0](#week-0)
+  - [Adding Secrets](#adding-secrets)
+  - [Branch Protection](#branch-protection)
+    - [Branch Protection Rules](#branch-protection-rules)
+  - [Added Github PR Template](#added-github-pr-template)
+
+This week acts as an introduction to the bootcamp.
 
 ## Adding Secrets
 
