@@ -47,7 +47,6 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan -input=false
-          # terraform output -json > /tmp/plan.json
 
       # Get Terraform Output without Applying
       - name: Get Terraform Output
@@ -108,5 +107,32 @@ jobs:
                 repo: context.repo.repo,
                 title: issueTitle,
                 body: issueBody,
+              });
+            }
+
+      # Step 8: Close Issue if Port is Accessible
+      - name: Close Issue if Port is Accessible
+        if: steps.check-port.outcome == 'success'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const ip = process.env.IP;
+            const port = process.env.PORT;
+            const issueTitle = `Grafana Port is not accessible`;
+
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+            });
+
+            // Find and close the issue if it exists
+            const issueToClose = existingIssues.data.find(issue => issue.title === issueTitle);
+            if (issueToClose) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueToClose.number,
+                state: 'closed',
               });
             }
