@@ -53,6 +53,7 @@ jobs:
         id: plan
         run: |
           terraform plan -refresh-only -no-color > plan.txt
+          cat plan.txt
           if grep -q "No changes. Infrastructure is up-to-date." plan.txt; then
             echo "No drift detected."
             echo "DRIFT=false" >> $GITHUB_ENV
