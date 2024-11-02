@@ -2,6 +2,11 @@
 
 - [Week 1](#week-1)
   - [Terraform Installation](#terraform-installation)
+    - [Create the Terraform Install Script](#create-the-terraform-install-script)
+      - [Terraform Install Script Contents](#terraform-install-script-contents)
+  - [AWS Installation](#aws-installation)
+    - [Create the AWS Install Script](#create-the-aws-install-script)
+      - [AWS Install Script Contents](#aws-install-script-contents)
   - [Pre-Commit Installation](#pre-commit-installation)
     - [Pre-Requisites Installation](#pre-requisites-installation)
     - [Working Pre-Commit](#working-pre-commit)
@@ -13,17 +18,22 @@
     - [Execution Mode](#execution-mode)
     - [Errors connecting to Workspace](#errors-connecting-to-workspace)
     - [Terraform Workspace login issues](#terraform-workspace-login-issues)
+    - [Further writeup](#further-writeup)
 
 ## Terraform Installation
 
 As the codespace does not have Terraform installed by default. To simplify the process I created a script from the instructions at [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](Install Terraform)
 
-This has been placed in `scripts\terraform_install`
+This has been placed in [scripts\terraform_install](../bin/terraform_install.sh)
+
+### Create the Terraform Install Script
 
 ```sh
 touch bin/terraform_install.sh
 chmod u+x bin/terraform_install.sh
 ```
+
+#### Terraform Install Script Contents
 
 ```sh
 #!/bin/bash
@@ -44,6 +54,28 @@ sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update
 
 sudo apt-get install terraform
+```
+
+## AWS Installation
+
+As the codespace does not have AWS installed by default to simplify the process I created a script from the instructions at [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](Install AWS CLI)
+
+This has been placed in [scripts\terraform_install](../bin/aws_install.sh)
+
+### Create the AWS Install Script
+
+```sh
+touch bin/terraform_install.sh
+chmod u+x bin/terraform_install.sh
+```
+
+#### AWS Install Script Contents
+
+```bash
+cd ../
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
 ```
 
 ## Pre-Commit Installation
@@ -91,6 +123,8 @@ Install terraform-docs using `go install github.com/terraform-docs/terraform-doc
 ### Working Pre-Commit
 
 Once all the required components were installed, running `pre-commit -a` shows the following which means that the pre-commit has been installed successfully and is working as expected.
+
+![image](https://github.com/user-attachments/assets/aa803cbe-97d8-4389-83b5-d160ce34378f)
 
 ## Terraform API Token
 
@@ -199,3 +233,7 @@ If successful the terraform action should be able to initialise successfully.
 With the `cloud` provider configured to connect to Terraform workspace I encountered the following error.
 
 ![image](https://github.com/user-attachments/assets/388de5ea-0c02-4c99-88d0-24cf4f56be56)
+
+### Further writeup
+
+I also wrote an article that expanded on this in further detail and posted it here [https://shehzadashiq.hashnode.dev/configuring-github-actions-to-use-terraform-workspace](https://shehzadashiq.hashnode.dev/configuring-github-actions-to-use-terraform-workspace)
