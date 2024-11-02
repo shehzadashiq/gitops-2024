@@ -62,6 +62,16 @@ jobs:
             echo "DRIFT=true" >> $GITHUB_ENV
           fi
 
+      # Step 6: Read and Extract Drift Details
+      - name: Extract Plan Output
+        if: env.DRIFT == 'true'
+        id: extract-plan
+        run: |
+          # Extract lines showing changes only
+          grep -A 5 'Plan:' plan.txt > drift_details.txt
+          # Convert to a GitHub-friendly format
+          echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
+
       # Create Issue if Drift is Detected
       - name: Create Issue if Drift Detected
         if: env.DRIFT == 'true'
@@ -70,7 +80,10 @@ jobs:
           script: |
             const issueTitle = 'Terraform Drift Detected';
             const issueBody = `Terraform drift has been detected in the infrastructure.\n\n
-                               Please review the details in the latest Terraform plan output.`;
+                    Please review the details in the latest Terraform plan output.\n\n
+                    Here are the details from the latest plan:\n\n
+                    \`\`\`\n${process.env.DRIFT_DETAILS}\n\`\`\`\n\n
+                    Please review the changes.`;
 
             const existingIssues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
@@ -94,3 +107,28 @@ jobs:
         with:
           name: terraform-drift-plan
           path: ./terraform/plan.txt
+
+      # Close Issue if Drift is Resolved
+      - name: Close Issue if Drift is Resolved
+        if: env.DRIFT == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issueTitle = 'Terraform Drift Detected';
+
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+            });
+
+            // Find and close the issue if it exists
+            const issueToClose = existingIssues.data.find(issue => issue.title === issueTitle);
+            if (issueToClose) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueToClose.number,
+                state: 'closed',
+              });
+            }
