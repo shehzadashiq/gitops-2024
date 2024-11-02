@@ -103,7 +103,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { github, context } = require('@actions/github');
             const ip = process.env.IP;
             const port = process.env.PORT;
             const issueTitle = `Port ${port} on ${ip} is not accessible`;
