@@ -69,7 +69,7 @@ This ensures that even on a failure the action continues to run
         continue-on-error: true
 ```
 
-To open an issue we use the action `actions/github-script@v6` with the following Javascript
+To open an issue we use the action [actions/github-script@v6](https://github.com/actions/github-script) with the following Javascript
 
 ```js
             const ip = process.env.IP;
@@ -95,7 +95,7 @@ To open an issue we use the action `actions/github-script@v6` with the following
             }
 ```
 
-To close the issue we use the action `actions/github-script@v6` with the following Javascript. This step runs only if the Check Port Accessibility step succeeds.
+To close the issue we use the action [actions/github-script@v6](https://github.com/actions/github-script) with the following Javascript. This step runs only if the Check Port Accessibility step succeeds.
 
 It searches for an open issue with the title `Grafana Port is not accessible`. If such an issue exists, it closes the issue by updating its state to closed.
 
