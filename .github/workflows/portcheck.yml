@@ -47,7 +47,7 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan -input=false
-          terraform output -json > output.json
+          terraform output -json > /tmp/plan.json
 
       # Extract values from Terraform output
       - name: Extract Terraform Output
