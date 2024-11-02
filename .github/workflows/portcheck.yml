@@ -43,14 +43,10 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      # Generates an execution plan for Terraform
+      # Generates an execution plan for Terraform and output
       - name: Terraform Plan
         run: |
           terraform plan -input=false
-
-      # Get Terraform Output without Applying
-      - name: Get Terraform Output
-        run: |
           terraform output -json > output.json
 
       # Extract values from Terraform output
