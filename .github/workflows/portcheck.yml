@@ -103,13 +103,14 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const { github, context } = require('@actions/github');
             const ip = process.env.IP;
             const port = process.env.PORT;
             const issueTitle = `Port ${port} on ${ip} is not accessible`;
             const issueBody = `The port ${port} on IP ${ip} could not be reached. Please investigate the issue.`;
 
             // Check if an issue already exists
-            const existingIssues = await github.issues.listForRepo({
+            const existingIssues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
@@ -117,7 +118,7 @@ jobs:
 
             // Only create an issue if one with the same title does not exist
             if (!existingIssues.data.some(issue => issue.title === issueTitle)) {
-              await github.issues.create({
+              await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: issueTitle,
