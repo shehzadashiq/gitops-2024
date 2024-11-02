@@ -1,5 +1,8 @@
 ---
+# https://github.com/marketplace/actions/terraform-cloud-enterprise-drift-detection
+# https://github.com/slok/tfe-drift
 name: 'Drift Detection - Terraform Cloud'
+
 
 on:
   schedule:
@@ -13,6 +16,6 @@ jobs:
       - uses: slok/tfe-drift-action@v0.4.0
         id: tfe-drift
         with:
-          tfe-token: ${{ secrets.TF_API_TOKEN }}
-          tfe-org: shehzad
+          tfe-token: ${{ secrets.TFE_TOKEN }}
+          tfe-org: ${{ secrets.TFE_ORGANIZATION }}
           limit-max-plans: 3
