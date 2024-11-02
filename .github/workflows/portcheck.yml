@@ -8,6 +8,8 @@ on:
 permissions:
   contents: read
   id-token: write
+  pull-requests: write # Required to post comments
+  issues: write  # Grant write permission to allow issue creation
 
 jobs:
   terraform:
