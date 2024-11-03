@@ -33,8 +33,26 @@ The following protections have applied
 - Require a pull request before merging
 - Require status checks to pass before merging
 
-![image](https://github.com/user-attachments/assets/5010a999-79e3-4f04-8c48-ea1a4529fc80)
+![image](https://github.com/user-attachments/assets/a34d625f-1ebc-4c56-a9e7-2781b0b3958f)
 
 ## Added Github PR Template
 
-The following [PR Template](../.github/pull_request_template.md) was created.
+The following [PR Template](../.github/pull_request_template.md) was created. It requires the following.
+
+```md
+# Description of PR
+
+Outline what the purpose of this PR is
+
+## Contributors
+
+@shehzadashiq
+
+## Checklist
+
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+```
