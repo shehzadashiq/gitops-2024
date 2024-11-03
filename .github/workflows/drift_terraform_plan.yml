@@ -65,7 +65,7 @@ jobs:
           echo "ENV_DRIFT=env.DRIFT"
 
 
-      # Step 6: Read and Extract Drift Details
+      # Read and Extract Drift Details
       - name: Extract Plan Output
         if: env.DRIFT == 'true'
         id: extract-plan
@@ -73,7 +73,12 @@ jobs:
           # Extract lines showing changes only
           grep -A 5 'Plan:' plan.txt > drift_details.txt
           # Convert to a GitHub-friendly format
-          echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
+          # echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
+          if [ -s drift_details.txt ]; then
+            echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
+          else
+            echo "DRIFT_DETAILS=No specific drift changes detected." >> $GITHUB_ENV
+          fi
 
       # Create Issue if Drift is Detected
       - name: Create Issue if Drift Detected
