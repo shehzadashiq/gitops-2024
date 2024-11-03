@@ -71,7 +71,7 @@ jobs:
         run: |
           # Extract lines showing changes only
           # grep -A 5 'Plan:' plan.txt > drift_details.txt
-          grep -A 5 'Plan:' ./terraform/plan.txt > drift_details.txt || echo "No specific changes found in plan."
+          grep -A 5 'Plan:' plan.txt > drift_details.txt || echo "No specific changes found in plan."
           # Convert to a GitHub-friendly format
           # echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
 
