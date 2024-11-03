@@ -4,8 +4,7 @@ name: 'Drift Detection S3'
 
 on:
   schedule:
-    # - cron: '*/30 * * * *'
-    - cron: '0 0 * * *'  # Runs daily at midnight (UTC)
+    - cron: '*/30 * * * *'
 
 jobs:
   detect_drift:
