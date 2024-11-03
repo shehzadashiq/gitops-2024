@@ -4,11 +4,12 @@ name: Check Port Accessibility
 on:
   schedule:
     - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: read
   id-token: write
-  pull-requests: write # Required to post comments
+  pull-requests: write   # Required to post comments
   issues: write  # Grant write permission to allow issue creation
 
 jobs:
@@ -106,7 +107,7 @@ jobs:
               });
             }
 
-      # Step 8: Close Issue if Port is Accessible
+      # Close Issue if Port is Accessible
       - name: Close Issue if Port is Accessible
         if: steps.check-port.outcome == 'success'
         uses: actions/github-script@v6
