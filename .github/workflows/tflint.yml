@@ -2,9 +2,12 @@
 name: Lint
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
   pull_request:
   workflow_dispatch:
+
+permissions:
+  pull-requests: write   # Required to post comments on a PR
 
 jobs:
   tflint:
@@ -42,4 +45,28 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Run TFLint
-        run: tflint -f compact
+        run: |
+          tflint -f compact > tflint_output.txt || true
+          if [ -s tflint_output.txt ]; then
+            echo "TFLINT_FAILED=true" >> $GITHUB_ENV
+          else
+            echo "TFLINT_FAILED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Comment on PR with TFLint Issues
+        if: env.TFLINT_FAILED == 'true' && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const tflintOutput = fs.readFileSync('./terraform/tflint_output.txt', 'utf8');
+            const commentBody = `### :warning: TFLint Issues Detected\n\n\`\`\`\n${tflintOutput}\n\`\`\`\nPlease review the above issues reported by TFLint.`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: commentBody,
+            });
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
