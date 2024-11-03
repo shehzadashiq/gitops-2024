@@ -5,7 +5,8 @@ name: 'Drift Detection S3'
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'
+    # - cron: '*/30 * * * *'
+    - cron: '0 0 * * *'  # Runs daily at midnight (UTC)
 
 jobs:
   detect_drift:
