@@ -61,6 +61,9 @@ jobs:
             echo "Drift detected!"
             echo "DRIFT=true" >> $GITHUB_ENV
           fi
+          echo "DRIFT=$DRIFT"
+          echo "ENV_DRIFT=env.DRIFT"
+
 
       # Step 6: Read and Extract Drift Details
       - name: Extract Plan Output
