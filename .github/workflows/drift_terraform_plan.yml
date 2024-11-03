@@ -52,7 +52,8 @@ jobs:
       - name: Terraform Plan (Refresh Only)
         id: plan
         run: |
-          terraform plan -refresh-only -no-color > plan.txt
+          # terraform plan -refresh-only -no-color > plan.txt
+          terraform plan -input=false > plan.txt
           # if grep -q "No changes. Infrastructure is up-to-date." plan.txt; then
           if grep -q "Plan: 0 to add, 0 to change, 0 to destroy." plan.txt; then
             echo "No drift detected."
