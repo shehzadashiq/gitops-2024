@@ -4,8 +4,8 @@ variable "region" {
 }
 
 variable "instance_type" {
-  type    = string
-  default = "t3.small"
+  # type    = string
+  # default = "t3.small"
 }
 
 # tflint-ignore: terraform_unused_declarations
