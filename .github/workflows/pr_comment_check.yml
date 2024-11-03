@@ -1,0 +1,28 @@
+---
+name: Enforce Comment Requirement on PR
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  check-comments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for PR Comments
+        uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            if (comments.length === 0) {
+              core.setFailed("PR cannot be merged until it has at least one comment.");
+            } else {
+              console.log("PR has comments and is ready for review.");
+            }
