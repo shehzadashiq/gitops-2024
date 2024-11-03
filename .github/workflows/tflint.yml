@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  pull-requests: write   # Required to post comments on a PR
+
 jobs:
   tflint:
     runs-on: ${{ matrix.os }}
