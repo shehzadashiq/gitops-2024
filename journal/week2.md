@@ -14,10 +14,10 @@ As actions need to checkout code they have some common Github actions. These are
 
 | Action    | Purpose |
 | -------- | ------- |
-| [actions/checkout@v4](https://github.com/actions/checkout)  | Checkout the repository to the GitHub Actions runner    |
-| [actions/cache@v4](https://github.com/actions/cache) |      |
-| [aws-actions/configure-aws-credentials@v4](https://github.com/aws-actions/configure-aws-credentials)    | Configures AWS Credentials    |
-|[hashicorp/setup-terraform@v3](https://github.com/hashicorp/setup-terraform) | Installs the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token |
+| [actions/checkout@v4](https://github.com/actions/checkout) | Checkout the repository to the GitHub Actions runner    |
+| [actions/cache@v4](https://github.com/actions/cache) | Caches plugin dir |
+| [aws-actions/configure-aws-credentials@v4](https://github.com/aws-actions/configure-aws-credentials) | Configures AWS Credentials |
+| [hashicorp/setup-terraform@v3](https://github.com/hashicorp/setup-terraform) | Installs the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token |
 
 ## Infrastructure Costing
 
