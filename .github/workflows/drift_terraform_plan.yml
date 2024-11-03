@@ -50,11 +50,10 @@ jobs:
 
       # Check for Drift with Terraform Plan (refresh-only)
       - name: Terraform Plan (Refresh Only)
-        working-directory: ./terraform
         id: plan
         run: |
           terraform plan -refresh-only -no-color > plan.txt
-          cat plan.txt
+          terraform show plan.txt
           if grep -q "No changes. Infrastructure is up-to-date." plan.txt; then
             echo "No drift detected."
             echo "DRIFT=false" >> $GITHUB_ENV
@@ -76,6 +75,7 @@ jobs:
           grep -A 5 'Plan:' ./terraform/plan.txt > drift_details.txt || echo "No specific changes found in plan."
           # Convert to a GitHub-friendly format
           # echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
+
           if [ -s drift_details.txt ]; then
             echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
           else
