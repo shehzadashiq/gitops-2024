@@ -33,7 +33,14 @@ The following protections have applied
 - Require a pull request before merging
 - Require status checks to pass before merging
 
-![image](https://github.com/user-attachments/assets/a34d625f-1ebc-4c56-a9e7-2781b0b3958f)
+![image](https://github.com/user-attachments/assets/72311bea-9db1-483c-a6d7-4897a8c6163e)
+
+The following checks are required to merge a PR to main
+
+- Comment is required on a PR
+- Infracost PR Check
+- Terraform Plan
+- TFLint checks
 
 ## Added Github PR Template
 
