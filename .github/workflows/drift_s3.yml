@@ -3,6 +3,7 @@
 name: 'Drift Detection S3'
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/30 * * * *'
 
