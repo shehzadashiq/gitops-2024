@@ -50,6 +50,7 @@ jobs:
 
       # Check for Drift with Terraform Plan (refresh-only)
       - name: Terraform Plan (Refresh Only)
+        working-directory: ./terraform
         id: plan
         run: |
           terraform plan -refresh-only -no-color > plan.txt
