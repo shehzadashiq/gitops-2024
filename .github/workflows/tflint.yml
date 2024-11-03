@@ -43,13 +43,12 @@ jobs:
 
       - name: Run TFLint
         run: |
-          tflint -f compact > tflint_output.txt
+          tflint -f compact > tflint_output.txt || true
           if [ -s tflint_output.txt ]; then
             echo "TFLINT_FAILED=true" >> $GITHUB_ENV
           else
             echo "TFLINT_FAILED=false" >> $GITHUB_ENV
           fi
-        continue-on-error: true
 
       - name: Comment on PR with TFLint Issues
         if: env.TFLINT_FAILED == 'true' && github.event_name == 'pull_request'
