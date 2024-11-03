@@ -2,24 +2,29 @@
 name: 'Drift Detection'
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
-    # - cron: '0 0 * * *'
+    - cron: '0 0 * * *'  # Runs daily at midnight (UTC)
+    # - cron:  '0 * * * *' # Every hour.
+    # - cron: '*/5 * * * *'
 
 permissions:
   contents: read
   id-token: write
+  pull-requests: write  # Required to post comments
+  issues: write  # Grant write permission to allow issue creation
 
 jobs:
-
-  terraform:
-    name: 'Terraform'
+  detect-drift:
+    name: Detect Terraform Drift
     runs-on: ubuntu-latest
     environment: production
     defaults:
       run:
         shell: bash
         working-directory: ./terraform
+    env:
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       # Use OIDC Role to checkout the repository with the Github Actions Runner
@@ -43,6 +48,89 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      # Generates an execution plan for Terraform
+      # Check for Drift with Terraform Plan
       - name: Terraform Plan
-        run: terraform plan -input=false
+        id: plan
+        run: |
+          terraform plan -input=false > plan.txt
+          if grep -q "0 to add, 0 to change, 0 to destroy" plan.txt; then
+            echo "No drift detected."
+            echo "DRIFT=false" >> $GITHUB_ENV
+          else
+            echo "Drift detected!"
+            echo "DRIFT=true" >> $GITHUB_ENV
+          fi
+
+      # Read and Extract Drift Details
+      - name: Extract Plan Output
+        if: env.DRIFT == 'true'
+        id: extract-plan
+        run: |
+          # Extract lines showing changes only
+          grep -A 5 'Plan:' plan.txt > drift_details.txt || echo "No specific changes found in plan."
+          # Convert to a GitHub-friendly format
+          if [ -s drift_details.txt ]; then
+            echo "DRIFT_DETAILS=$(cat drift_details.txt | sed 's/$/  /' | tr '\n' '\\n')" >> $GITHUB_ENV
+          else
+            echo "DRIFT_DETAILS=No specific drift changes detected." >> $GITHUB_ENV
+          fi
+
+      # Create Issue if Drift is Detected
+      - name: Create Issue if Drift Detected
+        if: env.DRIFT == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issueTitle = 'Terraform Drift Detected';
+            const issueBody = `Terraform drift has been detected in the infrastructure.\n\n
+                    Please review the details in the latest Terraform plan output.\n\n
+                    Here are the details from the latest plan:\n\n
+                    \`\`\`\n${process.env.DRIFT_DETAILS}\n\`\`\`\n\n`;
+
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+            });
+
+            if (!existingIssues.data.some(issue => issue.title === issueTitle)) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+              });
+            }
+
+      # Upload Plan Output (Optional, for Review)
+      - name: Upload Plan Output
+        if: env.DRIFT == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-drift-plan
+          path: ./terraform/plan.txt
+
+      # Close Issue if Drift is Resolved
+      - name: Close Issue if Drift is Resolved
+        if: env.DRIFT == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issueTitle = 'Terraform Drift Detected';
+
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+            });
+
+            // Find and close the issue if it exists
+            const issueToClose = existingIssues.data.find(issue => issue.title === issueTitle);
+            if (issueToClose) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueToClose.number,
+                state: 'closed',
+              });
+            }
