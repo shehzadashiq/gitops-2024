@@ -4,6 +4,8 @@ name: Enforce Comment Requirement on PR
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
+  pull_request_review_comment:
+    types: [created, deleted, edited]
 
 jobs:
   check-comments:
