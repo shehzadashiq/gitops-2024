@@ -1,6 +1,4 @@
 ---
-# This version of drift detection does not work with Terraform cloud
-# as it requires remote execution which causes other actions to fail
 # https://github.com/marketplace/actions/terraform-cloud-enterprise-drift-detection
 # https://github.com/slok/tfe-drift
 name: 'Drift Detection - Terraform Cloud'
@@ -9,8 +7,7 @@ name: 'Drift Detection - Terraform Cloud'
 on:
   schedule:
     # - cron:  '0 * * * *' # Every hour.
-    # - cron: '*/5 * * * *'
-    - cron: '0 0 * * *'  # Runs daily at midnight (UTC)
+    - cron: '*/5 * * * *'
 
 jobs:
   drift-detection:
