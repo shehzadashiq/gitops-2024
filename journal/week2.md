@@ -1,5 +1,24 @@
 # Week 2
 
+- [Week 2](#week-2)
+  - [Commom Actions](#commom-actions)
+  - [Infrastructure Costing](#infrastructure-costing)
+  - [TFLinting Action](#tflinting-action)
+  - [Port check Action](#port-check-action)
+
+In this week various actions were created. These have been listed below with any requirements needed to work
+
+## Commom Actions
+
+As actions need to checkout code they have some common Github actions. These are listed below.
+
+| Action    | Purpose |
+| -------- | ------- |
+| [actions/checkout@v4](https://github.com/actions/checkout)  | Checkout the repository to the GitHub Actions runner    |
+| [actions/cache@v4](https://github.com/actions/cache) |      |
+| [aws-actions/configure-aws-credentials@v4](https://github.com/aws-actions/configure-aws-credentials)    | Configures AWS Credentials    |
+|[hashicorp/setup-terraform@v3](https://github.com/hashicorp/setup-terraform) | Installs the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token |
+
 ## Infrastructure Costing
 
 Create an account on [https://www.infracost.io/](https://www.infracost.io/) which will allow you to generate a API key.
@@ -19,6 +38,14 @@ To set the secret in the `Production` environment use the following command
 `gh secret set -e Production INFRACOST_API_KEY`
 
 Copy action to use from the linked repository [https://github.com/infracost/actions](https://github.com/infracost/actions)
+
+## TFLinting Action
+
+An action has been created that lints Terraform files and checks for any errors. A comment is created on the PR when TFLint fails
+
+![image](https://github.com/user-attachments/assets/ee30688c-569f-4557-8dd5-5ac75d415763)
+
+It uses the following action [setup-tflint](https://github.com/terraform-linters/setup-tflint)
 
 ## Port check Action
 
@@ -121,3 +148,4 @@ It searches for an open issue with the title `Grafana Port is not accessible`. I
               });
             }
 ```
+
