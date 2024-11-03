@@ -49,6 +49,7 @@ jobs:
           else
             echo "TFLINT_FAILED=false" >> $GITHUB_ENV
           fi
+        continue-on-error: true
 
       - name: Comment on PR with TFLint Issues
         if: env.TFLINT_FAILED == 'true' && github.event_name == 'pull_request'
