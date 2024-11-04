@@ -11,3 +11,4 @@ There were certain configurations which I would like to have carried out but ran
 ## Resources
 
 - [https://www.reddit.com/r/Terraform/comments/1gf3jwv/plan_and_apply_with_pr_automation_via_github/](https://www.reddit.com/r/Terraform/comments/1gf3jwv/plan_and_apply_with_pr_automation_via_github/)
+- [A bash script to handle GitHub environment variables, mainly to create new environments, and copy variables values from one environment to another](https://gist.github.com/gustavovalverde/b0e566c2da331ae51116db9f74d30583)
