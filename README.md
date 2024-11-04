@@ -20,6 +20,8 @@ This contains OPA [Open Policy Agent](https://www.openpolicyagent.org/docs/lates
 
 The `/journal` directory contains journal entries based on the contents covered in the appropriate weeks.
 
-- [X] [Week 0](journal/week0.md)
-- [X] [Week 1](journal/week1.md)
-- [X] [Week 2](journal/week2.md)
+- [X] [Week 0](journal/week0.md) - This covers basic setup of the environment
+- [X] [Week 1](journal/week1.md) - This covers the basic actions for the project
+- [X] [Week 2](journal/week2.md) - This covers the more advanced actions for the project
+
+Link to [Grading Rubric](https://docs.google.com/spreadsheets/d/1rzgmrz60tY4HzUiJ_Cc4_W6dPRW9_j8avzOubugnCns/edit?usp=sharing)
