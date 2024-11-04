@@ -7,3 +7,7 @@ There were certain configurations which I would like to have carried out but ran
 - PR's to only be applied to staging with checks. Once PR's to staging were successful apply them to PR
 - Ignore Non-Terraform changes
 - Comment on a PR with useful plan information as suggested per the Rubric
+
+## Resources
+
+- [https://www.reddit.com/r/Terraform/comments/1gf3jwv/plan_and_apply_with_pr_automation_via_github/](https://www.reddit.com/r/Terraform/comments/1gf3jwv/plan_and_apply_with_pr_automation_via_github/)

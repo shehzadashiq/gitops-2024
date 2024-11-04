@@ -19,6 +19,7 @@
     - [Errors connecting to Workspace](#errors-connecting-to-workspace)
     - [Terraform Workspace login issues](#terraform-workspace-login-issues)
     - [Further writeup](#further-writeup)
+  - [Resources](#resources)
 
 ## Terraform Installation
 
@@ -237,3 +238,7 @@ With the `cloud` provider configured to connect to Terraform workspace I encount
 ### Further writeup
 
 I also wrote an article that expanded on this in further detail and posted it here [https://shehzadashiq.hashnode.dev/configuring-github-actions-to-use-terraform-workspace](https://shehzadashiq.hashnode.dev/configuring-github-actions-to-use-terraform-workspace)
+
+## Resources
+
+[https://www.youtube.com/watch?v=OULodhha9R4](Week 1 Livestream)

@@ -2,6 +2,9 @@
 
 - [Week 2](#week-2)
   - [Common Actions](#common-actions)
+  - [Plan](#plan)
+  - [Apply](#apply)
+  - [Destroy](#destroy)
   - [Infrastructure Costing](#infrastructure-costing)
   - [TFLinting Action](#tflinting-action)
   - [Port check Action](#port-check-action)
@@ -9,12 +12,13 @@
   - [Infrastructure Drift Action](#infrastructure-drift-action)
   - [Terraform Cloud Drift Action](#terraform-cloud-drift-action)
   - [Terraform S3 Drift Action](#terraform-s3-drift-action)
+  - [Resources](#resources)
 
 In this week various actions were created. These have been listed below with any requirements needed to work
 
 ## Common Actions
 
-As actions need to checkout code they have some common Github actions. These are listed below.
+As actions need to perform certain common tasks they have some common Github actions. These are listed below.
 
 | Action    | Purpose |
 | -------- | ------- |
@@ -22,14 +26,56 @@ As actions need to checkout code they have some common Github actions. These are
 | [actions/cache@v4](https://github.com/actions/cache) | Caches plugin dir |
 | [aws-actions/configure-aws-credentials@v4](https://github.com/aws-actions/configure-aws-credentials) | Configures AWS Credentials |
 | [hashicorp/setup-terraform@v3](https://github.com/hashicorp/setup-terraform) | Installs the latest version of Terraform CLI and configures the Terraform CLI configuration file with a Terraform Cloud user API token |
+| [open-policy-agent/setup-opa@v2](https://github.com/open-policy-agent/setup-opa) | GitHub action to configure the Open Policy Agent CLI in your GitHub Actions workflow |
 
 Actions have also been modified to allow `workflow_dispatch` event. This allows the action to be run manually. This simplifies testing of actions.
 
+## Plan
+
+The [Terraform Plan](../.github/workflows/plan.yml) action runs a Terraform Plan for our infrastructure.
+
+This action runs automatically when a PR is submitted (currently to the main branch).
+
+It carries out the following
+
+- Uses the OIDC Role to checkout the repository with the Github Actions Runner
+- Checkout the repository to the GitHub Actions runner
+- Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+- Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+- Checks that all Terraform configuration files adhere to a canonical format
+- Generates an execution plan for Terraform
+- Configures OPA (Open Policy Agent)
+- Run OPA Tests and output to the existing PR its findings
+
+If all the steps pass, the action completes successfully.
+
+This action requires the following secrets which have been saved in the environment and repository.
+
+| Action    | Purpose |
+| -------- | ------- |
+| `github.token` | Personal Access Token for Github|
+| `TF_API_TOKEN` | Terraform API Token |
+| `ROLE_TO_ASSUME` | Role that correlates to the OIDC role that has been created |
+
+## Apply
+
+The [Terraform Apply](../.github/workflows/plan.yml) action runs a Terraform Plan for our infrastructure. It builds on the [Terraform Plan](../.github/workflows/plan.yml) action however it additionally has an apply action to create the infrastructure.
+
+This action is currently run manually.
+
+## Destroy
+
+The [Terraform Apply](../.github/workflows/plan.yml) action runs a Terraform Destroy for our infrastructure. It builds on the [Terraform Plan](../.github/workflows/plan.yml) action however it additionally has an destroy action to destroy any created infrastructure.
+
+This action is currently run manually.
+
 ## Infrastructure Costing
 
-The [Run Infracost](../.github/workflows/infracost.yml) action checks a PR to see if it fulfills infrastructure policies before allowing a PR merge to complete.
+The [Run Infracost](../.github/workflows/infracost.yml) action checks a PR to see if it fulfills infrastructre policies before allowing a PR merge to complete.
 
-Create an account on [https://www.infracost.io/](https://www.infracost.io/) which will allow you to generate a API key.
+This action runs automatically when a PR is submitted (currently to the main branch).
+
+Create an account on [https://www.infracost.io/](https://www.infracost.io/) which will allow you to generate ua API key that the action requires.
 
 Infracost has multiple CI/CD integrations that can be used. We will use `GitHub Actions`.
 
@@ -50,6 +96,8 @@ Copy action to use from the linked repository [https://github.com/infracost/acti
 ## TFLinting Action
 
 The [Lint](../.github/workflows/tflint.yml) action has been created that lints Terraform files and checks for any errors. A comment is created on the PR when TFLint fails
+
+This action runs automatically when a PR is submitted (currently to the main branch).
 
 ![image](https://github.com/user-attachments/assets/ee30688c-569f-4557-8dd5-5ac75d415763)
 
@@ -88,7 +136,13 @@ To create a comment the following additional code was needed. If there is any fa
 
 ## Port check Action
 
-The [Check Port Accessibility](../.github/workflows/portcheck.yml) action has been created to check if the Grafana port is accessible. If the port is not accessible an issue is raised.
+The [Check Port Accessibility](../.github/workflows/portcheck.yml) action has been created to check if the Grafana port is accessible.
+
+This allows us to check application availability.
+
+This is currently scheduled to run daily at midnight.
+
+If the port is not accessible an issue is raised as shown below.
 
 ![image](https://github.com/user-attachments/assets/be209967-6320-4b17-8929-241e85680065)
 
@@ -194,7 +248,7 @@ It searches for an open issue with the title `Grafana Port is not accessible`. I
 
 The [Enforce Comment Requirement on PR](../.github/workflows/pr_comment_check.yml) will not allow a PR to merge unless a comment exists on it. If a comment exists it will pass otherwise it will fail.
 
-This is used in conjunction with a branch protection rule to ensure that the PR can only be merged if the checks pass.
+This is used in conjunction with a branch protection rule to ensure that the PR can only be merged if the checks pass to the main branch.
 
 It uses the [actions/github-script@v6](https://github.com/actions/github-script)
 
@@ -237,6 +291,8 @@ jobs:
 ## Infrastructure Drift Action
 
 The [Drift Detection](../.github/workflows/drift.yml) action checks to see if there is any drift in the infrastructure. If any drift is detected, an issue is raised. If the drift is resolved then it will close the issue.
+
+This is currently scheduled to run daily at midnight.
 
 An example of an issue that has been opened and closed is [https://github.com/shehzadashiq/gitops-2024/issues/70](https://github.com/shehzadashiq/gitops-2024/issues/70)
 
@@ -397,3 +453,11 @@ jobs:
       ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
       cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}      
 ```
+
+## Resources
+
+- [Week 2 Livestream](https://www.youtube.com/watch?v=xUgw-hUT3CQ)
+- [GitHub Actions: Workflow Dispatch for Manual Terraform Runs](https://www.youtube.com/watch?v=C1Rsl6ka-Aw)
+- [Using Terraform Checks to test Application Accessibility](https://www.youtube.com/watch?v=76Wn_DTBaQo)
+- [Controlling AWS costs in your Terraform GitHub Actions Workflows with Infracost and OPA](https://www.youtube.com/watch?v=M-YvDkiClwY)
+- [Using OPA to Create Guardrails for your GitHub Actions Terraform Deployments](https://www.youtube.com/watch?v=6SLMfK8TwkU)

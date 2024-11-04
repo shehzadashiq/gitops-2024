@@ -2,9 +2,11 @@
 
 - [Week 0](#week-0)
   - [Adding Secrets](#adding-secrets)
+  - [OIDC Role](#oidc-role)
   - [Branch Protection](#branch-protection)
     - [Branch Protection Rules](#branch-protection-rules)
   - [Added Github PR Template](#added-github-pr-template)
+  - [Resources](#resources)
 
 This week acts as an introduction to the bootcamp.
 
@@ -23,6 +25,19 @@ To set the same secret in an environment named `Production` use the following fo
 `gh secret set -e Production TOP_SECRET`
 
 This can then be referenced in an actions file with the following `secret-to-use: ${{ secrets.TOP_SECRET }}`
+
+## OIDC Role
+
+To work within GitHub Actions we use OpenID Connect (OIDC) to authenticate Terraform to AWS for deployments using GitHub Actions. This was covered in Derek's video
+
+[GitHub Actions: Configure OIDC Authentication for AWS and Terraform](https://www.youtube.com/watch?v=USIVWqXVv_U)
+
+As recommended I saved the OIDC role as a variable within my Github Environment.
+
+These were created using the Cloudformation files in this repository
+
+- [oidc-role.yaml](../cfn/oidc-role.yaml)
+- [backend-resources.yaml](../cfn/backend-resources.yaml) - I created resources using this but this was not needed as I am using Terraform Cloud Workspaces
 
 ## Branch Protection
 
@@ -63,3 +78,8 @@ Outline what the purpose of this PR is
 - [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
 ```
+
+## Resources
+
+- [Week 0 Livestream](https://www.youtube.com/watch?v=ciqxSVo4JXk&t=18s)
+- [GitHub Actions: Configure OIDC Authentication for AWS and Terraform](https://www.youtube.com/watch?v=USIVWqXVv_U)
