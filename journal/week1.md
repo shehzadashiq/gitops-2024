@@ -10,15 +10,17 @@
   - [Pre-Commit Installation](#pre-commit-installation)
     - [Pre-Requisites Installation](#pre-requisites-installation)
     - [Working Pre-Commit](#working-pre-commit)
-  - [Terraform API Token](#terraform-api-token)
+  - [Terraform Workspace Configuration](#terraform-workspace-configuration)
+    - [Terraform API Token](#terraform-api-token)
     - [User API Token](#user-api-token)
     - [Github OAuth Token](#github-oauth-token)
     - [Error when action is run](#error-when-action-is-run)
-  - [Terraform workspace configuration](#terraform-workspace-configuration)
+  - [Terraform workspace configuration](#terraform-workspace-configuration-1)
     - [Execution Mode](#execution-mode)
     - [Errors connecting to Workspace](#errors-connecting-to-workspace)
     - [Terraform Workspace login issues](#terraform-workspace-login-issues)
     - [Further writeup](#further-writeup)
+  - [Resources](#resources)
 
 ## Terraform Installation
 
@@ -126,7 +128,11 @@ Once all the required components were installed, running `pre-commit -a` shows t
 
 ![image](https://github.com/user-attachments/assets/aa803cbe-97d8-4389-83b5-d160ce34378f)
 
-## Terraform API Token
+## Terraform Workspace Configuration
+
+As I will be using Terraform Workspaces to store my state file additional permissions are needed. Specifically the tokens `TF_API_TOKEN` that the Github action can use to access the workspace. Setting this up caused some issues but I have outlined them below.
+
+### Terraform API Token
 
 Generate token via [https://app.terraform.io/app/settings/tokens](https://app.terraform.io/app/settings/tokens)
 
@@ -237,3 +243,7 @@ With the `cloud` provider configured to connect to Terraform workspace I encount
 ### Further writeup
 
 I also wrote an article that expanded on this in further detail and posted it here [https://shehzadashiq.hashnode.dev/configuring-github-actions-to-use-terraform-workspace](https://shehzadashiq.hashnode.dev/configuring-github-actions-to-use-terraform-workspace)
+
+## Resources
+
+[https://www.youtube.com/watch?v=OULodhha9R4](Week 1 Livestream)
