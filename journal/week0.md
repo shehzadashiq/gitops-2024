@@ -1,6 +1,7 @@
 # Week 0
 
 - [Week 0](#week-0)
+  - [Environment Used](#environment-used)
   - [Adding Secrets](#adding-secrets)
   - [OIDC Role](#oidc-role)
   - [Branch Protection](#branch-protection)
@@ -9,6 +10,10 @@
   - [Resources](#resources)
 
 This week acts as an introduction to the bootcamp.
+
+## Environment Used
+
+Instead of using an S3 backend to store my statefiles I will be using [Terraform Cloud Workspaces](https://app.terraform.io/)
 
 ## Adding Secrets
 
