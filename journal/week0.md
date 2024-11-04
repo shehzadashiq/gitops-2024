@@ -33,8 +33,33 @@ The following protections have applied
 - Require a pull request before merging
 - Require status checks to pass before merging
 
-![image](https://github.com/user-attachments/assets/5010a999-79e3-4f04-8c48-ea1a4529fc80)
+![image](https://github.com/user-attachments/assets/72311bea-9db1-483c-a6d7-4897a8c6163e)
+
+The following checks are required to merge a PR to main
+
+- Comment is required on a PR
+- Infracost PR Check
+- Terraform Plan
+- TFLint checks
 
 ## Added Github PR Template
 
-The following [PR Template](../.github/pull_request_template.md) was created.
+The following [PR Template](../.github/pull_request_template.md) was created. It requires the following.
+
+```md
+# Description of PR
+
+Outline what the purpose of this PR is
+
+## Contributors
+
+@shehzadashiq
+
+## Checklist
+
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+```
