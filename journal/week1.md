@@ -26,7 +26,7 @@
 
 As the codespace does not have Terraform installed by default. To simplify the process I created a script from the instructions at [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](Install Terraform)
 
-This has been placed in [scripts\terraform_install](../bin/terraform_install.sh)
+This has been placed in [/bin/terraform_install](../bin/terraform_install.sh)
 
 ### Create the Terraform Install Script
 
@@ -62,13 +62,13 @@ sudo apt-get install terraform
 
 As the codespace does not have AWS installed by default to simplify the process I created a script from the instructions at [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](Install AWS CLI)
 
-This has been placed in [scripts\terraform_install](../bin/aws_install.sh)
+This has been placed in [/bin/aws_install](../bin/aws_install.sh)
 
 ### Create the AWS Install Script
 
 ```sh
-touch bin/terraform_install.sh
-chmod u+x bin/terraform_install.sh
+touch bin/aws_install.sh
+chmod u+x bin/aws_install.sh
 ```
 
 #### AWS Install Script Contents
@@ -302,4 +302,5 @@ I also wrote an article that expanded on this in further detail and posted it he
 ## Resources
 
 - [https://www.youtube.com/watch?v=OULodhha9R4](Week 1 Livestream)
+- [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](Install Terraform)
 - [Markdownlint Pre-Commit Installation](https://rramos.github.io/2024/06/01/markdownlint/)
