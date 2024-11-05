@@ -26,7 +26,7 @@
 
 As the codespace does not have Terraform installed by default. To simplify the process I created a script from the instructions at [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](Install Terraform)
 
-This has been placed in [scripts\terraform_install](../bin/terraform_install.sh)
+This has been placed in [/bin/terraform_install](../bin/terraform_install.sh)
 
 ### Create the Terraform Install Script
 
@@ -62,13 +62,13 @@ sudo apt-get install terraform
 
 As the codespace does not have AWS installed by default to simplify the process I created a script from the instructions at [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](Install AWS CLI)
 
-This has been placed in [scripts\terraform_install](../bin/aws_install.sh)
+This has been placed in [/bin/aws_install](../bin/aws_install.sh)
 
 ### Create the AWS Install Script
 
 ```sh
-touch bin/terraform_install.sh
-chmod u+x bin/terraform_install.sh
+touch bin/aws_install.sh
+chmod u+x bin/aws_install.sh
 ```
 
 #### AWS Install Script Contents
@@ -82,6 +82,16 @@ sudo ./aws/install
 
 ## Pre-Commit Installation
 
+We will be using the following pre-commit checks that are defined in the repositories [.pre-commit-config.yaml](../.pre-commit-config.yaml)
+
+| Check | Purpose | Source |
+|-------|---------|--------|
+| [terraform_docs](https://github.com/antonbabenko/pre-commit-terraform?tab=readme-ov-file#:~:text=infracost_breakdown-,terraform_docs,-terraform_docs_replace%20(deprecated)) | Generates documentation from Terraform modules in various output formats | [antonbabenko/pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) |
+| [terraform_fmt](https://github.com/antonbabenko/pre-commit-terraform?tab=readme-ov-file#terraform_fmt) | Rewrites Terraform configuration files to a canonical format and style |[antonbabenko/pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) |
+| [terraform_tflint](https://github.com/terraform-linters/tflint) | Terraform Linter | [antonbabenko/pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) |
+| [yammlint](https://github.com/adrienverge/yamllint) | Linter for Yaml files | [adrienverge/yamllint](https://github.com/adrienverge/yamllint) |
+| [markdownlint](https://github.com/DavidAnson/markdownlint) | Checker and lint tool for Markdown/CommonMark files | [igorshubovych/markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) |
+
 Pre-commit needs to be installed with various components
 
 - pre-commit (Installed via pip)
@@ -89,7 +99,7 @@ Pre-commit needs to be installed with various components
 
 ### Pre-Requisites Installation
 
-Pre-commit needs to be installed with the following command
+The Pre-commit tool needs to be installed with the following command
 
 `pip install pre-commit`
 
@@ -110,12 +120,51 @@ repos:
     rev: v1.29.0
     hooks:
       - id: yamllint
+        args: [--strict, -c=.yamllint]      
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.41.0
     hooks:
       - id: markdownlint
         args: [--disable=MD013]   
 EOF
+```
+
+I also generated the [yamllint](../.yamllint) config file using the following code. This specifies the checks that yamllint will use.
+
+```sh
+---
+cat <<EOF > .yamllint
+yaml-files:
+  - '*.yaml'
+  - '*.yml'
+  - '.yamllint'
+
+rules:
+  braces: enable
+  brackets: enable
+  colons: enable
+  commas: enable
+  comments:
+    level: warning
+  comments-indentation:
+    level: warning
+  document-end: disable
+  document-start:
+    level: warning
+  empty-lines: enable
+  empty-values: disable
+  float-values: disable
+  hyphens: enable
+  indentation: enable
+  key-duplicates: enable
+  key-ordering: disable
+  line-length: disable
+  new-line-at-end-of-file: enable
+  new-lines: disable
+  octal-values: disable
+  quoted-strings: disable
+  trailing-spaces: enable
+  truthy: disable
 ```
 
 Once the pre-commit config has been created, install it `pre-commit install`
@@ -253,4 +302,5 @@ I also wrote an article that expanded on this in further detail and posted it he
 ## Resources
 
 - [https://www.youtube.com/watch?v=OULodhha9R4](Week 1 Livestream)
+- [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](Install Terraform)
 - [Markdownlint Pre-Commit Installation](https://rramos.github.io/2024/06/01/markdownlint/)
