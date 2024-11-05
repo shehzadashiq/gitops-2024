@@ -14,7 +14,7 @@
 The [.github](.github/) folder contains resources for the repository.
 
 - [workflows](.github/workflows/) contains workflows for actions
-- [.github](./github/) contains the PR template
+- [pull_request_template](.github/pull_request_template.md) contains the PR template used for PRs
 
 ## Cloudformation
 
