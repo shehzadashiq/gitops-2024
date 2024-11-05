@@ -32,4 +32,6 @@ The [/journal](./journal/) directory contains journal entries based on the conte
 - [X] [Week 2](journal/week2.md) - This covers the more advanced actions for the project
 - [X] [Week 3](journal/week3.md) - This covers items I would like to have carried out but ran out of time
 
-Link to [Grading Rubric](https://docs.google.com/spreadsheets/d/1rzgmrz60tY4HzUiJ_Cc4_W6dPRW9_j8avzOubugnCns/edit?usp=sharing)
+## Grading Rubric
+
+This [Grading Rubric](https://docs.google.com/spreadsheets/d/1rzgmrz60tY4HzUiJ_Cc4_W6dPRW9_j8avzOubugnCns/edit?usp=sharing) is used to mark the project.
