@@ -1,16 +1,23 @@
 # GitOps with Terraform 2024 Starter Code
 
+## .github
+
+The [.github](./github) folder contains resources for the repository.
+
+- [workflows](.github/workflows/) contains workflows for actions
+- [.github](./github) contains the PR template
+
 ## Cloudformation
 
-The code in the ./cloudformation directory is optional. It is used to configure the OIDC role used to authenticate your GitHub Actions workflows to AWS. It also allows you to create an S3 bucket if you want to use it as a backend to store terraform state files.
+The code in the [/cfn](./cfn/) directory is optional. It is used to configure the OIDC role used to authenticate your GitHub Actions workflows to AWS. It also allows you to create an S3 bucket if you want to use it as a backend to store terraform state files.
 
 ## Terraform
 
-The code in the ./terraform directory is the code for the course. It creates the resources required for the bootcamp. It has been modified and corrected after having linting and formatted applied.
+The code in the [/terraform](./terraform) directory is the code for the course. It creates the resources required for the bootcamp. It has been modified and corrected after having linting and formatted applied.
 
 ## Bin
 
-This contains various scripts to assist in setting up codespaces.
+This contains various scripts to assist in setting up codespaces and local environments.
 
 ## Policies
 
@@ -18,7 +25,7 @@ This contains OPA [Open Policy Agent](https://www.openpolicyagent.org/docs/lates
 
 ## Journaling Homework
 
-The `/journal` directory contains journal entries based on the contents covered in the appropriate weeks.
+The [/journal](./journal/) directory contains journal entries based on the contents covered in the appropriate weeks.
 
 - [X] [Week 0](journal/week0.md) - This covers basic setup of the environment
 - [X] [Week 1](journal/week1.md) - This covers the basic actions for the project
