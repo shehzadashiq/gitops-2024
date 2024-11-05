@@ -110,12 +110,51 @@ repos:
     rev: v1.29.0
     hooks:
       - id: yamllint
+        args: [--strict, -c=.yamllint]      
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.41.0
     hooks:
       - id: markdownlint
         args: [--disable=MD013]   
 EOF
+```
+
+I also generated the [yamllint](../.yamllint) config file using the following code. This specifies the checks that yamllint will use.
+
+```sh
+---
+cat <<EOF > .yamllint
+yaml-files:
+  - '*.yaml'
+  - '*.yml'
+  - '.yamllint'
+
+rules:
+  braces: enable
+  brackets: enable
+  colons: enable
+  commas: enable
+  comments:
+    level: warning
+  comments-indentation:
+    level: warning
+  document-end: disable
+  document-start:
+    level: warning
+  empty-lines: enable
+  empty-values: disable
+  float-values: disable
+  hyphens: enable
+  indentation: enable
+  key-duplicates: enable
+  key-ordering: disable
+  line-length: disable
+  new-line-at-end-of-file: enable
+  new-lines: disable
+  octal-values: disable
+  quoted-strings: disable
+  trailing-spaces: enable
+  truthy: disable
 ```
 
 Once the pre-commit config has been created, install it `pre-commit install`
