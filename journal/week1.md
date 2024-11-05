@@ -98,17 +98,23 @@ I then generated the `.pre-commit-config.yaml` file using the following shell co
 ```sh
 git init
 cat <<EOF > .pre-commit-config.yaml
+---
 repos:
-- repo: https://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.96.1
-  hooks:
-    - id: terraform_fmt
-    - id: terraform_docs
-    - id: terraform_tflint
-- repo: https://github.com/adrienverge/yamllint.git
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.96.1
+    hooks:
+      - id: terraform_docs
+      - id: terraform_fmt
+      - id: terraform_tflint
+  - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.29.0
     hooks:
-      - id: yamllint    
+      - id: yamllint
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.41.0
+    hooks:
+      - id: markdownlint
+        args: [--disable=MD013]   
 EOF
 ```
 
@@ -126,7 +132,7 @@ Install terraform-docs using `go install github.com/terraform-docs/terraform-doc
 
 Once all the required components were installed, running `pre-commit -a` shows the following which means that the pre-commit has been installed successfully and is working as expected.
 
-![image](https://github.com/user-attachments/assets/aa803cbe-97d8-4389-83b5-d160ce34378f)
+![image](https://github.com/user-attachments/assets/f8a58cd1-8293-41d8-b162-c87306322d30)
 
 ## Terraform Workspace Configuration
 
@@ -246,4 +252,5 @@ I also wrote an article that expanded on this in further detail and posted it he
 
 ## Resources
 
-[https://www.youtube.com/watch?v=OULodhha9R4](Week 1 Livestream)
+- [https://www.youtube.com/watch?v=OULodhha9R4](Week 1 Livestream)
+- [Markdownlint Pre-Commit Installation](https://rramos.github.io/2024/06/01/markdownlint/)

@@ -2,9 +2,9 @@
 
 - [GitOps with Terraform 2024 Starter Code](#gitops-with-terraform-2024-starter-code)
   - [.github](#github)
+  - [Bin](#bin)
   - [Cloudformation](#cloudformation)
   - [Terraform](#terraform)
-  - [Bin](#bin)
   - [Policies](#policies)
   - [Journaling Homework](#journaling-homework)
   - [Grading Rubric](#grading-rubric)
@@ -16,6 +16,10 @@ The [.github](.github/) folder contains resources for the repository.
 - [workflows](.github/workflows/) contains workflows for actions
 - [pull_request_template](.github/pull_request_template.md) contains the PR template used for PRs
 
+## Bin
+
+The [/bin](./bin/) contains various scripts to assist in setting up codespaces and local environments.
+
 ## Cloudformation
 
 The code in the [/cfn](./cfn/) directory is optional. It is used to configure the OIDC role used to authenticate your GitHub Actions workflows to AWS. It also allows you to create an S3 bucket if you want to use it as a backend to store terraform state files.
@@ -23,10 +27,6 @@ The code in the [/cfn](./cfn/) directory is optional. It is used to configure th
 ## Terraform
 
 The code in the [/terraform](./terraform/) directory is the code for the course. It creates the resources required for the bootcamp. It has been modified and corrected after having linting and formatted applied.
-
-## Bin
-
-This contains various scripts to assist in setting up codespaces and local environments.
 
 ## Policies
 
