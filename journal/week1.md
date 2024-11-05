@@ -82,6 +82,16 @@ sudo ./aws/install
 
 ## Pre-Commit Installation
 
+We will be using the following pre-commit checks that are defined in the repositories [.pre-commit-config.yaml](../.pre-commit-config.yaml)
+
+| Check | Purpose | Source |
+|-------|---------|--------|
+| [terraform_docs](https://github.com/antonbabenko/pre-commit-terraform?tab=readme-ov-file#:~:text=infracost_breakdown-,terraform_docs,-terraform_docs_replace%20(deprecated)) | Generates documentation from Terraform modules in various output formats | [antonbabenko/pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) |
+| [terraform_fmt](https://github.com/antonbabenko/pre-commit-terraform?tab=readme-ov-file#terraform_fmt) | Rewrites Terraform configuration files to a canonical format and style |[antonbabenko/pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) |
+| [terraform_tflint](https://github.com/terraform-linters/tflint) | Terraform Linter | [antonbabenko/pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform) |
+| [yammlint](https://github.com/adrienverge/yamllint) | Linter for Yaml files | [adrienverge/yamllint](https://github.com/adrienverge/yamllint) |
+| [markdownlint](https://github.com/DavidAnson/markdownlint) | Checker and lint tool for Markdown/CommonMark files | [igorshubovych/markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) |
+
 Pre-commit needs to be installed with various components
 
 - pre-commit (Installed via pip)
@@ -89,7 +99,7 @@ Pre-commit needs to be installed with various components
 
 ### Pre-Requisites Installation
 
-Pre-commit needs to be installed with the following command
+The Pre-commit tool needs to be installed with the following command
 
 `pip install pre-commit`
 
